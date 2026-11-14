@@ -1,0 +1,1015 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Bellora Boost</title>
+
+<style>
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: Inter, Arial, sans-serif;
+}
+
+body {
+    min-height: 100vh;
+    color: #fff;
+    background:
+        radial-gradient(circle at top left, rgba(124,58,237,.35), transparent 35%),
+        radial-gradient(circle at bottom right, rgba(236,72,153,.25), transparent 35%),
+        #080812;
+}
+
+button {
+    border: 0;
+    cursor: pointer;
+}
+
+.container {
+    width: 100%;
+    max-width: 1200px;
+    margin: auto;
+    padding: 25px;
+}
+
+/* NAVBAR */
+
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 18px 25px;
+    margin-bottom: 30px;
+
+    background: rgba(20,20,35,.65);
+    border: 1px solid rgba(255,255,255,.08);
+    border-radius: 20px;
+    backdrop-filter: blur(20px);
+}
+
+.logo {
+    font-size: 24px;
+    font-weight: 900;
+    letter-spacing: -.5px;
+}
+
+.logo span {
+    color: #a855f7;
+}
+
+.user {
+    display: none;
+    align-items: center;
+    gap: 10px;
+}
+
+.avatar {
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+    background: linear-gradient(135deg,#9333ea,#ec4899);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+}
+
+.login-btn {
+    padding: 12px 20px;
+    border-radius: 12px;
+    color: white;
+    font-weight: bold;
+    background: linear-gradient(135deg,#9333ea,#ec4899);
+}
+
+/* HERO */
+
+.hero {
+    text-align: center;
+    padding: 60px 20px 45px;
+}
+
+.hero h1 {
+    font-size: clamp(36px,7vw,72px);
+    font-weight: 900;
+}
+
+.hero h1 span {
+    background: linear-gradient(90deg,#a855f7,#ec4899);
+    -webkit-background-clip: text;
+    color: transparent;
+}
+
+.hero p {
+    max-width: 650px;
+    margin: 18px auto;
+    color: #a5a5b5;
+    font-size: 17px;
+    line-height: 1.7;
+}
+
+/* STATS */
+
+.stats {
+    display: grid;
+    grid-template-columns: repeat(3,1fr);
+    gap: 15px;
+    margin-bottom: 25px;
+}
+
+.card {
+    background: rgba(20,20,35,.7);
+    border: 1px solid rgba(255,255,255,.08);
+    border-radius: 20px;
+    padding: 25px;
+    backdrop-filter: blur(20px);
+}
+
+.stat-title {
+    color: #9999aa;
+    font-size: 13px;
+}
+
+.stat-value {
+    margin-top: 8px;
+    font-size: 30px;
+    font-weight: 900;
+}
+
+/* MAIN */
+
+.grid {
+    display: grid;
+    grid-template-columns: 1.2fr .8fr;
+    gap: 20px;
+}
+
+.card h2 {
+    margin-bottom: 20px;
+}
+
+/* ADD TARGET */
+
+.form {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+input {
+    flex: 1;
+    min-width: 0;
+    padding: 15px;
+    border-radius: 12px;
+    outline: none;
+    border: 1px solid rgba(255,255,255,.1);
+    background: rgba(0,0,0,.3);
+    color: white;
+}
+
+input::placeholder {
+    color: #77778a;
+}
+
+.add-btn {
+    padding: 0 20px;
+    border-radius: 12px;
+    color: white;
+    font-weight: bold;
+    background: linear-gradient(135deg,#9333ea,#ec4899);
+}
+
+/* TARGET */
+
+.target {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 15px;
+
+    padding: 16px;
+    margin-bottom: 12px;
+
+    border-radius: 15px;
+    background: rgba(255,255,255,.04);
+    border: 1px solid rgba(255,255,255,.06);
+}
+
+.target-info {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.target-icon {
+    width: 45px;
+    height: 45px;
+    border-radius: 13px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(135deg,#2563eb,#9333ea);
+    font-size: 20px;
+}
+
+.target-name {
+    font-weight: bold;
+}
+
+.target-type {
+    color: #8e8e9d;
+    font-size: 12px;
+    margin-top: 4px;
+}
+
+.boost-btn {
+    padding: 11px 16px;
+    border-radius: 10px;
+    background: linear-gradient(135deg,#7c3aed,#db2777);
+    color: white;
+    font-weight: bold;
+}
+
+.boost-btn:disabled {
+    opacity: .35;
+    cursor: not-allowed;
+}
+
+/* BOOST PANEL */
+
+.boost-box {
+    text-align: center;
+}
+
+.boost-number {
+    font-size: 65px;
+    font-weight: 900;
+
+    background: linear-gradient(135deg,#a855f7,#ec4899);
+    -webkit-background-clip: text;
+    color: transparent;
+}
+
+.boost-text {
+    color: #9999aa;
+    margin-bottom: 20px;
+}
+
+.progress {
+    width: 100%;
+    height: 10px;
+    border-radius: 20px;
+    background: #252535;
+    overflow: hidden;
+}
+
+.progress-bar {
+    height: 100%;
+    width: 100%;
+    border-radius: 20px;
+    background: linear-gradient(90deg,#9333ea,#ec4899);
+    transition: width .3s;
+}
+
+.timer {
+    margin-top: 15px;
+    color: #aaa;
+    font-size: 13px;
+}
+
+/* INFO */
+
+.info {
+    margin-top: 20px;
+    line-height: 1.7;
+    color: #9999aa;
+    font-size: 14px;
+}
+
+.info strong {
+    color: #fff;
+}
+
+/* TOAST */
+
+.toast {
+    position: fixed;
+    bottom: 25px;
+    right: 25px;
+
+    max-width: 320px;
+
+    padding: 15px 18px;
+    border-radius: 14px;
+
+    background: #171725;
+    border: 1px solid rgba(255,255,255,.1);
+
+    box-shadow: 0 10px 40px rgba(0,0,0,.4);
+
+    transform: translateY(100px);
+    opacity: 0;
+
+    transition: .3s;
+}
+
+.toast.show {
+    transform: translateY(0);
+    opacity: 1;
+}
+
+/* FOOTER */
+
+footer {
+    text-align: center;
+    padding: 35px 20px;
+    color: #666675;
+    font-size: 13px;
+}
+
+/* MOBILE */
+
+@media(max-width:800px) {
+    .stats {
+        grid-template-columns: 1fr;
+    }
+
+    .grid {
+        grid-template-columns: 1fr;
+    }
+
+    .form {
+        flex-direction: column;
+    }
+
+    .add-btn {
+        padding: 14px;
+    }
+
+    .target {
+        align-items: flex-start;
+    }
+
+    .boost-btn {
+        white-space: nowrap;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+<nav class="navbar">
+
+    <div class="logo">
+        Bellora <span>Boost</span>
+    </div>
+
+    <div id="loginArea">
+
+        <!-- GERÇEK TELEGRAM LOGIN WIDGET BURAYA EKLENECEK -->
+        <button class="login-btn" onclick="demoLogin()">
+            Telegram ile Giriş
+        </button>
+
+    </div>
+
+</nav>
+
+<section class="hero">
+
+    <h1>
+        Telegram topluluğunu
+        <span>güçlendir.</span>
+    </h1>
+
+    <p>
+        Telegram grup ve kanallarını Bellora Boost'a ekle,
+        günlük ücretsiz boost hakkını kullan ve topluluğunu
+        daha görünür hale getir.
+    </p>
+
+</section>
+
+<div class="stats">
+
+    <div class="card">
+        <div class="stat-title">
+            Günlük Boost Hakkı
+        </div>
+
+        <div class="stat-value">
+            <span id="remaining">2</span>/2
+        </div>
+    </div>
+
+    <div class="card">
+        <div class="stat-title">
+            Eklenen Hedef
+        </div>
+
+        <div class="stat-value" id="targetCount">
+            0
+        </div>
+    </div>
+
+    <div class="card">
+        <div class="stat-title">
+            Hesap
+        </div>
+
+        <div class="stat-value" id="accountStatus">
+            Misafir
+        </div>
+    </div>
+
+</div>
+
+<div class="grid">
+
+<!-- SOL -->
+
+<div class="card">
+
+    <h2>
+        📢 Grup / Kanal Ekle
+    </h2>
+
+    <div class="form">
+
+        <input
+            id="targetInput"
+            type="text"
+            placeholder="@kanal veya @grupkullaniciadi"
+        >
+
+        <button
+            class="add-btn"
+            onclick="addTarget()">
+            + Ekle
+        </button>
+
+    </div>
+
+    <div id="targets"></div>
+
+</div>
+
+
+<!-- SAĞ -->
+
+<div class="card boost-box">
+
+    <h2>
+        ⚡ Boost Sistemi
+    </h2>
+
+    <div class="boost-number" id="boostCount">
+        2
+    </div>
+
+    <div class="boost-text">
+        Bugünkü ücretsiz boost hakkın
+    </div>
+
+    <div class="progress">
+
+        <div
+            class="progress-bar"
+            id="progressBar">
+        </div>
+
+    </div>
+
+    <div
+        class="timer"
+        id="timer">
+        Hakların hazır
+    </div>
+
+    <div class="info">
+
+        <strong>Nasıl çalışır?</strong><br>
+
+        • Telegram hesabınla giriş yap.<br>
+        • Grup veya kanalını ekle.<br>
+        • 24 saat içinde 2 ücretsiz boost kullan.<br>
+        • Hakların kullanım zamanından itibaren
+        24 saatlik bekleme sistemine göre yenilenir.
+
+    </div>
+
+</div>
+
+</div>
+
+<footer>
+    © 2026 Bellora Boost — Telegram topluluk güçlendirme platformu
+</footer>
+
+</div>
+
+<div id="toast" class="toast"></div>
+
+
+<script>
+
+/* ==================================================
+   BELLORA BOOST
+   FRONTEND DEMO MANTIĞI
+================================================== */
+
+const MAX_BOOST = 2;
+
+let data = JSON.parse(
+    localStorage.getItem("belloraData") ||
+    '{"targets":[],"boosts":[],"user":null}'
+);
+
+
+/* TOAST */
+
+function showToast(message) {
+
+    const toast =
+        document.getElementById("toast");
+
+    toast.textContent = message;
+
+    toast.classList.add("show");
+
+    setTimeout(() => {
+
+        toast.classList.remove("show");
+
+    }, 3000);
+}
+
+
+/* TELEGRAM LOGIN DEMO */
+
+function demoLogin() {
+
+    data.user = {
+        id: "telegram-demo",
+        name: "Telegram Kullanıcısı",
+        username: "bellora_user"
+    };
+
+    save();
+
+    render();
+
+    showToast(
+        "Telegram hesabı ile giriş yapıldı."
+    );
+}
+
+
+/*
+GERÇEK SİSTEMDE BURADA TELEGRAM LOGIN
+WIDGET KULLANILMALI.
+
+ÖRNEK:
+
+<script async
+src="https://telegram.org/js/telegram-widget.js?22"
+data-telegram-login="BOT_USERNAME"
+data-size="large"
+data-auth-url="https://SENIN-DOMAININ.com/auth">
+</script>
+
+Telegram'dan gelen kullanıcı bilgileri
+backend tarafında Telegram Bot Token ile
+doğrulanmalıdır.
+*/
+
+
+/* LOCAL STORAGE */
+
+function save() {
+
+    localStorage.setItem(
+        "belloraData",
+        JSON.stringify(data)
+    );
+
+}
+
+
+/* BOOST SAYISI */
+
+function getAvailableBoosts() {
+
+    const now = Date.now();
+
+    data.boosts =
+        data.boosts.filter(
+            time => now - time < 86400000
+        );
+
+    return Math.max(
+        0,
+        MAX_BOOST - data.boosts.length
+    );
+}
+
+
+/* HEDEF EKLE */
+
+function addTarget() {
+
+    if (!data.user) {
+
+        showToast(
+            "Önce Telegram hesabınla giriş yapmalısın."
+        );
+
+        return;
+    }
+
+    const input =
+        document.getElementById("targetInput");
+
+    let username =
+        input.value.trim();
+
+    if (!username) {
+
+        showToast(
+            "Grup veya kanal kullanıcı adı gir."
+        );
+
+        return;
+    }
+
+    if (!username.startsWith("@")) {
+
+        username =
+            "@" + username;
+    }
+
+    const exists =
+        data.targets.some(
+            x => x.username.toLowerCase()
+            === username.toLowerCase()
+        );
+
+    if (exists) {
+
+        showToast(
+            "Bu hedef zaten eklenmiş."
+        );
+
+        return;
+    }
+
+    data.targets.push({
+
+        id: Date.now(),
+
+        username: username,
+
+        type: "Telegram",
+
+        boosts: 0
+
+    });
+
+    input.value = "";
+
+    save();
+
+    render();
+
+    showToast(
+        "Grup / kanal başarıyla eklendi."
+    );
+}
+
+
+/* BOOST */
+
+function boostTarget(id) {
+
+    if (!data.user) {
+
+        showToast(
+            "Önce Telegram hesabınla giriş yapmalısın."
+        );
+
+        return;
+    }
+
+    const available =
+        getAvailableBoosts();
+
+    if (available <= 0) {
+
+        showToast(
+            "Bugünkü boost hakkın doldu."
+        );
+
+        return;
+    }
+
+    const target =
+        data.targets.find(
+            x => x.id === id
+        );
+
+    if (!target) return;
+
+
+    /*
+    BURADA GERÇEK SİSTEMDE:
+
+    Backend API çağrısı yapılır.
+
+    Örneğin:
+
+    POST /api/boost
+
+    {
+        telegramUserId: "...",
+        targetId: "...",
+        targetUsername: "@kanal"
+    }
+
+    Backend Telegram Bot API / gerekli
+    yetkilendirmeleri kontrol ederek boost
+    işlemini gerçekleştirir.
+    */
+
+
+    data.boosts.push(Date.now());
+
+    target.boosts++;
+
+    save();
+
+    render();
+
+    showToast(
+        target.username +
+        " için boost gönderildi! ⚡"
+    );
+}
+
+
+/* HEDEF SİL */
+
+function removeTarget(id) {
+
+    data.targets =
+        data.targets.filter(
+            x => x.id !== id
+        );
+
+    save();
+
+    render();
+
+    showToast(
+        "Hedef kaldırıldı."
+    );
+}
+
+
+/* RENDER */
+
+function render() {
+
+    const remaining =
+        getAvailableBoosts();
+
+    document.getElementById(
+        "remaining"
+    ).textContent = remaining;
+
+    document.getElementById(
+        "boostCount"
+    ).textContent = remaining;
+
+    document.getElementById(
+        "targetCount"
+    ).textContent =
+        data.targets.length;
+
+
+    /* ACCOUNT */
+
+    if (data.user) {
+
+        document.getElementById(
+            "accountStatus"
+        ).textContent = "Aktif";
+
+        document.getElementById(
+            "loginArea"
+        ).innerHTML = `
+
+            <div class="user">
+
+                <div class="avatar">
+                    ${data.user.name
+                        .charAt(0)
+                        .toUpperCase()}
+                </div>
+
+                <div>
+                    <strong>
+                        ${data.user.name}
+                    </strong>
+
+                    <div style="
+                        color:#888;
+                        font-size:11px;
+                    ">
+                        @${data.user.username}
+                    </div>
+                </div>
+
+            </div>
+
+        `;
+
+    }
+
+
+    /* PROGRESS */
+
+    const percentage =
+        (remaining / MAX_BOOST) * 100;
+
+    document.getElementById(
+        "progressBar"
+    ).style.width =
+        percentage + "%";
+
+
+    /* TARGETS */
+
+    const container =
+        document.getElementById(
+            "targets"
+        );
+
+    container.innerHTML = "";
+
+    if (data.targets.length === 0) {
+
+        container.innerHTML = `
+
+            <div style="
+                text-align:center;
+                padding:35px 10px;
+                color:#777;
+            ">
+
+                Henüz grup veya kanal eklenmedi.
+
+            </div>
+
+        `;
+
+        return;
+    }
+
+
+    data.targets.forEach(target => {
+
+        const div =
+            document.createElement("div");
+
+        div.className = "target";
+
+        div.innerHTML = `
+
+            <div class="target-info">
+
+                <div class="target-icon">
+                    📢
+                </div>
+
+                <div>
+
+                    <div class="target-name">
+                        ${target.username}
+                    </div>
+
+                    <div class="target-type">
+                        Telegram •
+                        ${target.boosts} boost
+                    </div>
+
+                </div>
+
+            </div>
+
+            <div>
+
+                <button
+                    class="boost-btn"
+                    ${remaining <= 0 ? "disabled" : ""}
+                    onclick="boostTarget(${target.id})">
+
+                    ⚡ Boost
+
+                </button>
+
+                <button
+                    onclick="removeTarget(${target.id})"
+                    style="
+                    margin-left:5px;
+                    background:transparent;
+                    color:#777;
+                    padding:8px;
+                    ">
+
+                    ✕
+
+                </button>
+
+            </div>
+
+        `;
+
+        container.appendChild(div);
+
+    });
+
+}
+
+
+/* TIMER */
+
+function updateTimer() {
+
+    if (data.boosts.length === 0) {
+
+        document.getElementById(
+            "timer"
+        ).textContent =
+            "2 boost hakkın hazır.";
+
+        return;
+    }
+
+    const oldest =
+        Math.min(...data.boosts);
+
+    const remaining =
+        86400000 -
+        (Date.now() - oldest);
+
+    if (remaining <= 0) {
+
+        render();
+
+        return;
+    }
+
+    const hours =
+        Math.floor(
+            remaining / 3600000
+        );
+
+    const minutes =
+        Math.floor(
+            (remaining % 3600000)
+            / 60000
+        );
+
+    const seconds =
+        Math.floor(
+            (remaining % 60000)
+            / 1000
+        );
+
+    document.getElementById(
+        "timer"
+    ).textContent =
+        `Bir sonraki hak için ${hours}s ${minutes}dk ${seconds}sn`;
+}
+
+
+/* START */
+
+render();
+
+setInterval(() => {
+
+    render();
+    updateTimer();
+
+}, 1000);
+
+</script>
+
+</body>
+</html>
